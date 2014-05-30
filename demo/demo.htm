@@ -11,29 +11,36 @@
 		var frameArray=[
 			{	yPos:100,
 				playFn:function(){
-					$(".c1").stop(true,true).animate({top:126},100);
+					$(".c1").stop(true,true).animate({top:800},100);
 				},
 				initFn:function(){
-					$(".c1").stop(true,true).animate({top:800},100);			
+					$(".c1").stop(true,true).animate({top:100},100);			
 				}
 			},
-			{	yPos:800,
+			{	yPos:500,
 				initFn:function(){
-					$(".c2").animate({left:-1200,top:868},200);
+					$(".c2").animate({left:-1200,top:0},200);
 				},
 				playFn:function(){
-					$(".c2").animate({left:-243,top:828},300);
+					$(".c2").animate({left:-243,top:0},300);
 				}
 			},
-			{	yPos:1800,
+			{	
+				yPos:900,
 				initFn:function(){
 					$(".c3").hide();
 				},
 				playFn:function(){
-					$(".c3").each(function(i){
-						var top=$(this).css('top');
-						$(this).show().css({'top':-800}).stop(true,true).animate({'top':top},i*100)	
-					});
+					$(".c3").fadeIn()
+				}
+			},
+			{	
+				yPos:1500,
+				initFn:function(){
+					$(".c4").animate({right:-100});
+				},
+				playFn:function(){
+					$(".c4").show().animate({right:'100%'})
 				}
 			}			
 		]
@@ -47,17 +54,17 @@
 </head>
 
 <body style="width:800px; margin:0 auto;">
-	<div style="height:500px; position:relative;"></div>
-	<div style="height:300px; position:relative;">
+	<div style="height:100px; position:relative;"></div>
+	<div style="height:800px; position:relative;">
     	<div  class="c1"  style="position:absolute; width:100px; height:100px; background:#f00;"></div>
     </div>
-	<div style="height:300px; position:relative;">
+	<div style="height:800px; position:relative;">
     	<div  class="c2"  style="position:absolute; width:100px; height:100px; background:#f0f;"></div>
     </div>
-	<div style="height:300px; position:relative;">
+	<div style="height:800px; position:relative;">
     	<div  class="c3"  style="position:absolute; width:100px; height:100px; background:#ff0;"></div>
     </div>
-	<div style="height:300px; position:relative;">
+	<div style="height:800px; position:relative;">
     	<div  class="c4"  style="position:absolute; width:100px; height:100px; background:#00f;"></div>
     </div>
     
