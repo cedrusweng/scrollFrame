@@ -74,7 +74,7 @@ frameItem={
 * playFn:定义动画结束位置
 
 
-### 页面调用
+#### 页面调用
 ```javascript
 //初始化	
 var scrFrame=new scrollFrame({'frameArray':frameArray});	
