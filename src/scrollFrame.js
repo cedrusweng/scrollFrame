@@ -16,85 +16,93 @@
 		_init: 初始化
 		_getScrollTop:获取当前top值
 		_addEvent:事件绑定
-		getFrameYPos:获取对应的Y位置设置
-		frameExec: 执行对应的动画函数
+		_getFrameYPos:获取对应的Y位置设置
+		_frameExec: 执行对应的动画函数
 		addFrame: 添加帧动画
-		playList：遍历执行所有动画
-		enable：应用效果 a
+		_playList：遍历执行所有动画
+		enable：应用效果
 */
-
-function scrollFrame(opts){
-	this._locked=[];
-	this.frameArray=opts&&opts.frameArray||[];
-	this.context=opts&&opts.context||window;
-	this._cache=[];
-	this._init();
-}
-scrollFrame.prototype={
-	constructor:scrollFrame,
-	_init:function(){
-		var i=0,len=this.frameArray.length;
-		if(len<1)return;
-		for(;i<len;i++){
-			this.frameExec(i,'initFn');
-		}	
-	},
-	_getScrollTop:function(){
-		return this.context.scrollTop|| 
-				document.body.scrollTop|| 
-				document.documentElement.scrollTop;
-	},
-	_getFrameToggle:function(idx){
-		return this.frameArray[idx]['toggle']
-	},
-	_addEvent:function(fn){
-		if(this.context.addEventListener){
-			this.context.addEventListener('scroll',fn,false);	
-		}else if(this.context.attachEvent){
-			this.context.attachEvent('onscroll',fn);
-		}else{
-			this.context["onscroll"]=fn;	
-		}
-	},
-	addFrame:function(frameObj){
-		this.frameArray.push(frameObj);
+(function(){
+	function scrollFrame(opts){
+		this._locked=[];
+		this.frameArray=opts&&opts.frameArray||[];
+		this.context=opts&&opts.context||window;
 		this._init();
-	},
-	getFrameYPos:function(idx){
-		return this.frameArray[idx]['yPos'];
-	},
-	frameExec:function(idx,key){
-		this.frameArray[idx][key]&&this.frameArray[idx][key]();
-	},	
-	playList:function(){		
-		if(this.frameArray.length<1)return;
-		var top=this._getScrollTop(),
-			i=0,
-			len=this.frameArray.length;
-		for(;i<len;i++){
-			if(this.getFrameYPos(i)&&top>this.getFrameYPos(i)){
-				if(!this._locked[i]){
-					this._locked[i]=true;
-					this.frameExec(i,'playFn');	
-				}			
+	}
+	scrollFrame.prototype={
+		constructor:scrollFrame,
+		_init:function(){
+			var i=0,len=this.frameArray.length;
+			if(len<1)return;
+			for(;i<len;i++){
+				this._frameExec(i,'initFn');
+			}	
+		},
+		_getScrollTop:function(){
+			return this.context.scrollTop|| 
+					document.body.scrollTop|| 
+					document.documentElement.scrollTop;
+		},
+		_addEvent:function(fn){
+			if(this.context.addEventListener){
+				this.context.addEventListener('scroll',fn,false);	
+			}else if(this.context.attachEvent){
+				this.context.attachEvent('onscroll',fn);
 			}else{
-				if(this._locked[i]){
-					this._locked[i]=false;
-					this.frameExec(i,'initFn');	
-				}				
+				this.context["onscroll"]=fn;	
 			}
+		},
+		_getFrameYPos:function(idx){
+			return this.frameArray[idx]['yPos'];
+		},
+		_frameExec:function(idx,key){
+			this.frameArray[idx][key]&&this.frameArray[idx][key]();
+		},	
+		_playList:function(){		
+			if(this.frameArray.length<1)return;
+			var top=this._getScrollTop(),
+				i=0,
+				len=this.frameArray.length;
+			for(;i<len;i++){
+				if(this._getFrameYPos(i)&&top>this._getFrameYPos(i)){
+					if(!this._locked[i]){
+						this._locked[i]=true;
+						this._frameExec(i,'playFn');	
+					}			
+				}else{
+					if(this._locked[i]){
+						this._locked[i]=false;
+						this._frameExec(i,'initFn');	
+					}				
+				}
+				
+			}
+		},
+		addFrame:function(frameObj){
+			this.frameArray.push(frameObj);
+			this._init();
+		},
+		enable:function(){
+			var that=this;
+			this._addEvent(function(){
+				that._playList.call(that);
+			});
 			
 		}
-	},
-	enable:function(){
-		var that=this;
-		this._addEvent(function(){
-			that.playList.call(that);
-		});
-		
 	}
-}
-
+	//对外接口
+	window.scrollFrame=(function(){
+		return function(opts){
+			var sF=new scrollFrame(opts);
+			this.addFrame=function(frameObj){
+				sF.addFrame(frameObj);
+			}
+			this.enable=function(){
+				sF.enable();
+			}				
+		}	
+	})()	
+})()
 /* 示例
 	//动画数组集体定义
 	var frameArray=[
