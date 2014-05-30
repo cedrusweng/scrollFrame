@@ -1,5 +1,5 @@
 /**
-	作者：FE-翁雪松
+	作者：FE-脚后跟
 	时间：2013-11-14
 	版本：v 1.0
 	功能：实例垂直滚动对应的执行动画组
@@ -41,11 +41,11 @@ scrollFrame.prototype={
 	},
 	_getScrollTop:function(){
 		return this.context.scrollTop|| 
-				document.body.scrollTop|| //标准
-				document.documentElement.scrollTop;//IE	
+				document.body.scrollTop|| 
+				document.documentElement.scrollTop;
 	},
 	_getFrameToggle:function(idx){
-		return this.frameArray[idx]['toggle']	
+		return this.frameArray[idx]['toggle']
 	},
 	_addEvent:function(fn){
 		if(this.context.addEventListener){
