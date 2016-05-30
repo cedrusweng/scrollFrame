@@ -1,0 +1,243 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="gb2312">
+<title>视差页面演示</title>
+<link href="css/parallax.css" rel="stylesheet">
+<script type="text/javascript" src="http://icon.xcar.com.cn/wxs/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="js/jquery.mousewheel.min.js"></script>
+<script>
+$(function(){
+	//动画数组集体定义
+	var frameArray=[
+		{	yPos:0,
+			initFn:function(){
+				$(".perfect_parts").animate({'opacity':"0",top:172});
+				$('.section_car').css({width:100,height:100,marginLeft:-50,top:350})
+				$(".yellow_mask").animate({height:340});
+			},
+			playFn:function(){
+				$(".perfect_parts").animate({'opacity':"1",top:72});
+				$('.section_car').animate({width:387,height:299,marginLeft:-193,top:250})
+				$(".yellow_mask").animate({height:0});	
+			}
+			
+		},
+		{	
+		
+			yPos:$(".live").offset().top,
+			initFn:function(){
+				$(".livcar").animate({marginLeft:-302,top:185,'opacity':0},200);
+				$(".livpower1").fadeOut(100);
+				$(".livpower2").fadeOut(300);
+				$(".livpower3").fadeOut(500);
+			},
+			playFn:function(){
+				$(".livcar").animate({marginLeft:-180,top:203,'opacity':1},300);
+				$(".livpower3").fadeIn(100);
+				$(".livpower2").fadeIn(300);
+				$(".livpower1").fadeIn(500);
+			}
+		},
+		{	yPos:$(".frame3").offset().top,
+			initFn:function(){
+				$(".frame3 .rect1").animate({width:0,height:0,left: -315,top:-187})
+				$(".frame3 .rect2").animate({width:0,height:0,top:-187,left:"100%"});
+				$(".frame3 .rect3").animate({width:0,height:0,top:'100%',left:-315})
+				$(".frame3 .rect4").animate({width:0,height:0,top:'100%',left:"100%"})
+				
+				$(".frame3 .frame_car").animate({width:0,height:0})				
+				$(".frame3 .frame_text").animate({bottom:"-102px",'opacity':0});
+				
+				
+			},
+			playFn:function(){
+				$(".frame3 .rect1").animate({width:315,height:187,left: '0',top:'0'})
+				$(".frame3 .rect2").animate({width:315,height:187,left: '50%',top:0})				
+				$(".frame3 .rect3").animate({width:315,height:187,left: 0,top:'50%'})
+				$(".frame3  .rect4").animate({width:315,height:187,left: '50%',top:'50%'})
+				$(".frame3 .frame_car").animate({width:586,height:380})
+				$(".frame3 .frame_text").animate({bottom:"150px",'opacity':1});
+				
+				
+			}
+		},
+		{	yPos:$(".frame4").offset().top,
+			initFn:function(){
+				
+				$(".frame4 .frame_car").animate({width:0,height:0,bottom:500,marginLeft:-901})
+				
+				$(".frame4 .frame_text").animate({marginLeft:0,width:0,height:0,'opacity':0});
+				
+				
+			},
+			playFn:function(){
+			
+				$(".frame4 .frame_car").animate({width:1104,height:414,bottom:0,marginLeft:-640})
+				
+				
+				$(".frame4 .frame_text").animate({marginLeft:-450,width:901,height:274,'opacity':1});
+				
+				
+			}
+		},
+		{	yPos:$(".frame5").offset().top,
+			initFn:function(){
+				
+				$(".frame5 .frame_car").animate({bottom:-400})				
+				$(".frame5 .frame_text").animate({marginLeft:0,width:0,height:0,'opacity':0});					
+				$('.circle1,.circle2,.circle3,.circle4').animate({ width:0,height:0,left:394,top:177})	
+				
+			},
+			playFn:function(){
+			
+				$(".frame5 .frame_car").animate({bottom:50})				
+				
+				$(".frame5 .frame_text").animate({marginLeft:-300,width:602,height:171,'opacity':1});
+				
+				$('.circle1,.circle2,.circle3,.circle4').stop(true).animate({ width:177,height:177,top:0,left:300})
+				$('.circle1').animate({left:0})
+				$('.circle2').animate({left:209})
+				$('.circle3').animate({left:414})
+				$('.circle4').animate({left:624})
+			}
+		},
+		{	yPos:$(".frame6").offset().top,
+			initFn:function(){				
+				$(".frame6 .frame6_mask").animate({left:'-100%'})				
+				$(".frame6 .frame_car").animate({left:'150%'});
+			},
+			playFn:function(){			
+				$(".frame6 .frame6_mask").animate({left:0},200,function(){
+					$(".frame6 .frame_car").animate({left:'50%'});
+				})				
+				
+			}
+		}							
+	]
+	
+	
+	
+	
+	
+	for(var j=0,len=frameArray.length;j<len;j++){
+		frameArray[j].initFn();	
+	}
+	setTimeout(function(){
+		$(".perfect_parts").stop(true,true).animate({'opacity':"1",top:72},700);
+			$('.section_car').stop(true,true).animate({width:387,height:299,marginLeft:-193,top:250})
+			$(".yellow_mask").stop(true,true).animate({height:0});
+	}
+	,100)
+	function resetFrameWin(){
+		$(".section").css({
+			height:$(window).height()	
+		})
+	}
+	
+	resetFrameWin();
+	$(window).resize(function(){resetFrameWin()})
+	
+	
+	
+	
+	
+	i=1
+	winIdx=0;
+	currentIdx=0;
+	winHeight=$(window).height()
+	minScrollTop=0;
+	maxScrollTop=$(document.body).scroll().height()-winHeight;	
+	winMax=$('.section').size()-1;
+	
+	$(document.body).on('mousewheel',mouseWheelHandler)
+	
+	function mouseWheelHandler(e){
+		removeMouseWheelHandler();
+		
+		
+		if(e.deltaY<0){			
+			winIdx++;
+			if(winIdx>winMax){
+				winIdx=winMax
+				addMouseWheelHandler()	
+				return;	
+			};
+		}else{			
+			winIdx--;
+			if(winIdx<0){
+				winIdx=0
+				addMouseWheelHandler()	
+				return	
+			}
+		}		
+		
+		frameArray[currentIdx].initFn();
+		$('html,body').animate({scrollTop:winHeight*winIdx},function(){
+			currentIdx=winIdx;	
+			frameArray[currentIdx].playFn();
+		});
+		
+		setTimeout(function(){
+				addMouseWheelHandler()	
+		},1500)
+	}
+	
+	
+	function addMouseWheelHandler(){
+		$(document.body).on('mousewheel',mouseWheelHandler)	
+	}
+	function removeMouseWheelHandler(){
+		$(document.body).off('mousewheel',mouseWheelHandler)
+		
+	}
+	
+})
+	
+    </script>
+</head>
+
+<body>
+<div class="header section">
+	<div class="logo"><img src="images/logo.png" width="377" height="56"></div>
+	<div class="perfect_parts"></div>
+    <div class="hback"></div>
+    <div class="section_car"></div>
+	<div class="yellow_mask"></div>
+</div>
+<div class="live section">
+	<div class="livcar"></div>
+    <div class="livpower1"><img src="images/power1.png"></div>
+    <div class="livpower2"><img src="images/power2.png"></div>
+    <div class="livpower3"><img src="images/power3.png"></div>
+</div>
+<div class="section frame3">
+	<div class="frame_light">
+    	<div class="rect1"><img src="images/section3_rect1.png"></div>
+        <div class="rect2"><img src="images/section3_rect2.png"></div>
+        <div class="rect3"><img src="images/section3_rect3.png"></div>
+        <div class="rect4"><img src="images/section3_rect4.png"></div>
+    </div>
+	<div class="frame_text"></div>
+    <div class="frame_car"></div>
+</div>
+<div class="section frame4">
+	<div class="frame_text"></div>
+    <div class="frame_car"></div>
+</div>
+<div class="section frame5">
+	<div class="frame_light">
+    	<div class="circle1"></div>
+        <div class="circle2"></div>
+        <div class="circle3"></div>
+        <div class="circle4"></div>
+    </div>
+	<div class="frame_text"></div>
+    <div class="frame_car"></div>
+</div>
+<div class="section frame6">
+	<div class="frame6_mask"></div>
+    <div class="frame_car"></div>
+</div>
+</body>
+</html>

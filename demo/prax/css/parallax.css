@@ -1,0 +1,304 @@
+@charset "gb2312";
+/* CSS Document */
+
+*{ margin:0; padding:0}
+li,ul{ list-style: none;}
+
+
+
+body{
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+
+
+.section{
+	position: relative;	
+	overflow: hidden;
+}
+
+.header{
+	position: relative;
+	height: 902px;
+	background:url(../images/header_bg.jpg) no-repeat center top;
+	overflow:hidden;
+}
+.logo{
+	position: absolute;
+	right: 0;
+	top: 10px;
+}
+.perfect_parts{
+	position: absolute;
+	top: 72px;
+	left:0;
+	width: 100%;
+	height:602px;
+	background:url(../images/perfect_part.png) no-repeat center top;
+}
+.hback{
+	position: absolute;
+	top: 600px;
+	left: 50%;
+	margin-left: -323px;
+	width: 647px;
+	height: 250px;
+	background: url(../images/hback.png) no-repeat center center;
+	z-index: 4;
+}
+.yellow_mask{
+	position:absolute;
+	left: 0;
+	bottom: 0;
+	height: 340px;
+	width:100%;
+	background: #edc900;
+}
+
+.section_car{
+	position: absolute;
+	background:url(../images/section1_car.png) no-repeat;
+	background-size:100%;
+	width: 387px;
+	height: 299px;
+	left: 50%;
+	margin-left: -193px;
+	top: 250px;
+}
+
+.live{
+	position: relative;
+	height: 900px;
+	background:url(../images/live_bg.jpg) no-repeat center top;
+	overflow:hidden;
+	background-size:cover;
+}
+
+.livcar{
+	position: absolute;
+	top: 203px;
+	left: 50%;
+	margin-left: -302px;
+	width: 615px;
+	height: 302px;
+	background:url(../images/car.png) no-repeat;
+}
+
+.livpower1{
+	position: absolute;
+	top: 212px;
+	left: 50%;
+	margin-left: -600px;
+	width: 215px;
+	height: 374px;
+	background:url(../images/power1.png) no-repeat;
+	z-index: 3;
+		
+}
+.livpower2{	
+	position: absolute;
+	top: 230px;
+	left: 50%;
+	margin-left: -433px;
+	width: 176px;
+	height: 230px;
+	background:url(../images/power2.png) no-repeat;
+	z-index: 2;
+}
+.livpower3{	
+	position: absolute;
+	top: 386px;
+	left: 50%;
+	margin-left: -295px;
+	width: 56px;
+	height: 71px;
+	background:url(../images/power3.png) no-repeat;
+	z-index: 1;		
+}
+
+.frame3{
+	background:url(../images/section_bg3.jpg) no-repeat center bottom;
+	background-size:auto 100%;
+	background-attachment: fixed;
+}
+
+.frame4{
+	background:url(../images/section_bg4.jpg) no-repeat center bottom;
+	background-size:auto 100%;
+	background-attachment: fixed;
+}
+
+.frame5{
+	background:url(../images/section_bg5.jpg) no-repeat center bottom;
+	background-size:auto 100%;
+	background-attachment: fixed;
+}
+.frame6{
+	background:url(../images/section_bg6.jpg) no-repeat center bottom;
+	background-size:auto 100%;
+	background-attachment: fixed;
+}
+.frame_light,
+.frame_car,
+.frame_text{
+	position: absolute;	
+	left: 50%;
+}
+
+
+.rect1,
+.rect2,
+.rect3,
+.rect4{ 
+	position: absolute;
+	width: 315px;
+	height: 187px;
+}
+.rect2,
+.rect4{
+	left: 50%;
+	margin-left:10px;
+}
+.rect3,
+.rect4{
+	top: 50%;
+}
+.rect1{
+	margin-left:75px;
+}
+.rect4{
+	margin-left:-65px;
+}
+.frame3 .frame_light{
+	top: 205px;
+	margin-left: -660px;
+	width: 660px;
+	height: 394px;	
+}
+.frame3 .frame_light img{
+	width: 100%;
+	height: 100%;
+}
+.frame3 .frame_car{
+	top: 294px;
+	width: 586px;
+	height: 380px;
+	background:url(../images/section3_car.png) no-repeat;
+	background-size:100%;
+}
+.frame3 .frame_text{
+	width: 780px;
+	height: 102px;
+	margin-left: -390px;
+	bottom: 150px;
+	background:url(../images/section3_text.png) no-repeat;
+	
+}
+
+.frame4 .frame_car{
+	position: absolute;
+	left: 50%;
+	bottom: 0px;
+	width: 1104px;
+	height: 414px;
+	margin-left: -640px;
+	background:url(../images/section4_car.png) no-repeat;
+	background-size: 100%;
+}
+.frame4 .frame_text{
+	position: absolute;
+	top: 155px;
+	left: 50%;
+	margin-left: -450px;
+	width: 901px;
+	height: 276px;
+	background:url(../images/section4_text.png) no-repeat;
+	background-size: 100%;
+}
+
+.frame5 .frame_car{
+	position: absolute;
+	bottom: 50px;
+	left: 50%;
+	margin-left: -363px;
+	width: 635px;
+	height: 292px;
+	background:url(../images/section5_car.png) no-repeat;
+	background-size: 100%;
+}
+.frame5 .frame_text{
+	position: absolute;
+	bottom: 387px;
+	left: 50%;
+	width: 602px;
+	height: 171px;
+	margin-left: -313px;
+	background:url(../images/section5_text.png) no-repeat;
+	background-size: 100%;
+}
+
+.frame5 .frame_light{
+	position: absolute;
+	bottom:640px;	
+	left: 50%;
+	width: 800px;
+	height: 180px;
+	margin-left: -400px;
+}
+.frame5 .circle1,
+.frame5 .circle2,
+.frame5 .circle3,
+.frame5 .circle4{
+	position: absolute;	
+	width: 177px;
+	height: 177px;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+
+.frame5 .frame_light .circle1{
+	background-image:url(../images/section5_circle1.png);
+	top:0;
+	left:0;
+}
+.frame5 .frame_light .circle2{
+	background-image:url(../images/section5_circle2.png);
+	top:0;
+	left:206px;
+}
+.frame5 .frame_light .circle3{
+	background-image:url(../images/section5_circle3.png);
+	top:0;
+	right:206px;
+}
+.frame5 .frame_light .circle4{
+	background-image:url(../images/section5_circle4.png);
+	top:0;
+	right:0;
+}
+
+
+.frame6_mask{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background:url(../images/section_bg6_cover.jpg) no-repeat center bottom;
+	background-size:auto 100%;
+	z-index:1;
+	top: 0;
+	left: 0;
+}
+
+.frame6 .frame_car{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -500px;
+	margin-top: -113px;
+	background:url(../images/section6_car.png) no-repeat;
+	width: 1171px;
+	height: 237px;
+	z-index: 2;
+}
