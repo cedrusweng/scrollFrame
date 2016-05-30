@@ -27,6 +27,7 @@
 		this._locked=[];
 		this.frameArray=opts&&opts.frameArray||[];
 		this.context=opts&&opts.context||window;
+	
 		this._init();
 	}
 	scrollFrame.prototype={
@@ -86,13 +87,11 @@
 			var that=this;
 			this._addEvent(function(){
 				that._playList.call(that);
-			});
-			
+			});			
 		}
 	}
 	//对外接口
-	window.scrollFrame=(function(){
-		return function(opts){
+	window.scrollFrame=function(opts){
 			var sF=new scrollFrame(opts);
 			this.addFrame=function(frameObj){
 				sF.addFrame(frameObj);
@@ -100,8 +99,7 @@
 			this.enable=function(){
 				sF.enable();
 			}				
-		}	
-	})()	
+		}
 })()
 /* 示例
 	//动画数组集体定义
